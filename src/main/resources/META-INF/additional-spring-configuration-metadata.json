@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "cloudstock.token.header",
+      "type": "java.lang.String",
+      "description": "Description for cloudstock.token.header."
+    },
+    {
+      "name": "cloudstock.token.secret",
+      "type": "java.lang.String",
+      "description": "Description for cloudstock.token.secret."
+    }
+  ] }
