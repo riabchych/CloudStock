@@ -1,45 +1,18 @@
 package com.riabchych.cloudstock.service;
 
-import com.riabchych.cloudstock.dao.IBarcodeDAO;
 import com.riabchych.cloudstock.entity.Barcode;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class BarcodeService implements IBarcodeService {
+public interface BarcodeService {
 
-    @Autowired
-    private IBarcodeDAO barcodeDAO;
+    boolean addBarcode(Barcode barcode);
 
-    @Override
-    public synchronized boolean addBarcode(Barcode barcode) {
-        if (barcodeDAO.barcodeExists(barcode.getCode())) {
-            return false;
-        } else {
-            barcodeDAO.addBarcode(barcode);
-            return true;
-        }
-    }
+    Barcode getBarcodeById(long id);
 
-    @Override
-    public Barcode getBarcodeById(long id) {
-        return barcodeDAO.getBarcodeById(id);
-    }
+    void updateBarcode(Barcode barcode);
 
-    @Override
-    public void updateBarcode(Barcode barcode) {
-        barcodeDAO.updateBarcode(barcode);
-    }
+    void deleteBarcode(Long id);
 
-    @Override
-    public void deleteBarcode(Long id) {
-        barcodeDAO.deleteBarcode(id);
-    }
-
-    @Override
-    public List<Barcode> getAllBarcodes() {
-        return barcodeDAO.getAllBarcodes();
-    }
+    List<Barcode> getAllBarcodes();
 }
