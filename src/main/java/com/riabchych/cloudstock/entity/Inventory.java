@@ -12,30 +12,28 @@ import java.util.Date;
 public class Inventory implements Serializable {
 
     @Id
-    @Column()
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column()
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column()
+    @Column(name = "year", nullable = false)
     private Date year;
 
-    @Column()
+    @Column(name = "number", nullable = false)
     private String number;
 
-    @Column()
+    @Column(name = "comment")
     private String comment;
 
-    @Column()
+    @Column(name = "price", nullable = false)
     private float price;
 
-    @Column()
-    private int count;
-
-    @Column(nullable = false, columnDefinition = "TINYINT(1)")
-    private int status;
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private EnumStatus status;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "barcode_id", nullable = false)
@@ -100,22 +98,6 @@ public class Inventory implements Serializable {
         this.price = price;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
     public Barcode getBarcode() {
         return barcode;
     }
@@ -138,5 +120,13 @@ public class Inventory implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public EnumStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EnumStatus status) {
+        this.status = status;
     }
 }

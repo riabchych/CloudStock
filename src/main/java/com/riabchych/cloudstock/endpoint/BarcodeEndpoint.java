@@ -1,7 +1,10 @@
 package com.riabchych.cloudstock.endpoint;
 
+import com.riabchych.cloudstock.annotation.CrossOrigin;
+import com.riabchych.cloudstock.annotation.Secured;
 import com.riabchych.cloudstock.entity.Barcode;
-import com.riabchych.cloudstock.service.IBarcodeService;
+import com.riabchych.cloudstock.entity.EnumRole;
+import com.riabchych.cloudstock.service.BarcodeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +22,21 @@ import java.util.List;
 public class BarcodeEndpoint {
 
     private static final Logger logger = LoggerFactory.getLogger(BarcodeEndpoint.class);
+    private final BarcodeService barcodeService;
+
     @Autowired
-    private IBarcodeService barcodeService;
+    public BarcodeEndpoint(BarcodeService barcodeService) {
+        this.barcodeService = barcodeService;
+    }
 
     @GET
-    @Path("/list")
+    @CrossOrigin
+    @Path("/")
+    @Secured({
+            EnumRole.ROLE_ADMIN,
+            EnumRole.ROLE_USER,
+            EnumRole.ROLE_OWNER
+    })
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBarcodeDetails() {
         List<Barcode> list = barcodeService.getAllBarcodes();
@@ -31,15 +44,26 @@ public class BarcodeEndpoint {
     }
 
     @GET
+    @CrossOrigin
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Secured({
+            EnumRole.ROLE_ADMIN,
+            EnumRole.ROLE_USER,
+            EnumRole.ROLE_OWNER
+    })
     public Response getBarcodeById(@PathParam("id") Long id) {
         Barcode barcode = barcodeService.getBarcodeById(id);
         return Response.ok(barcode).build();
     }
 
     @POST
-    @Path("/add")
+    @CrossOrigin
+    @Path("/")
+    @Secured({
+            EnumRole.ROLE_USER,
+            EnumRole.ROLE_ADMIN,
+            EnumRole.ROLE_OWNER
+    })
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addBarcode(Barcode barcode) {
         boolean isAdded = barcodeService.addBarcode(barcode);
@@ -51,7 +75,12 @@ public class BarcodeEndpoint {
     }
 
     @PUT
-    @Path("/update")
+    @CrossOrigin
+    @Path("/{id}")
+    @Secured({
+            EnumRole.ROLE_ADMIN,
+            EnumRole.ROLE_OWNER
+    })
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateBarcode(Barcode barcode) {
@@ -60,7 +89,12 @@ public class BarcodeEndpoint {
     }
 
     @DELETE
+    @CrossOrigin
     @Path("/{id}")
+    @Secured({
+            EnumRole.ROLE_ADMIN,
+            EnumRole.ROLE_OWNER
+    })
     @Consumes(MediaType.APPLICATION_JSON)
     public Response deleteBarcode(@PathParam("id") Long id) {
         barcodeService.deleteBarcode(id);

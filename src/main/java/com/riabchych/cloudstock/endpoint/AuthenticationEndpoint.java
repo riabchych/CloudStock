@@ -1,66 +1,60 @@
 package com.riabchych.cloudstock.endpoint;
 
+import com.riabchych.cloudstock.annotation.CrossOrigin;
+import com.riabchych.cloudstock.entity.Credentials;
 import com.riabchych.cloudstock.entity.Token;
 import com.riabchych.cloudstock.entity.User;
 import com.riabchych.cloudstock.service.UserService;
+import com.riabchych.cloudstock.util.PasswordUtils;
 import com.riabchych.cloudstock.util.TokenUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.security.PermitAll;
 import javax.persistence.EntityNotFoundException;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import java.security.Key;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Logger;
 
 @PermitAll
 @Path("/authentication")
+@Component
 public class AuthenticationEndpoint {
+
+    private final PasswordUtils passwordUtils;
+    private final UserService userService;
+    private final TokenUtil tokenUtil;
 
     private final static Logger logger = Logger.getLogger(AuthenticationEndpoint.class.getName());
 
-    @Context
-    UserService uService;
 
-    @Context
-    Key key;
+    @Autowired
+    public AuthenticationEndpoint(UserService userService, PasswordUtils passwordUtils, TokenUtil tokenUtil) {
+        this.userService = userService;
+        this.passwordUtils = passwordUtils;
+        this.tokenUtil = tokenUtil;
+    }
 
     @POST
+    @CrossOrigin
     @Produces("application/json")
-    @Consumes("application/x-www-form-urlencoded")
-    public Response authenticateUser(@FormParam("username") String username,
-                                     @FormParam("password") String password) {
-
-        Date expiry = getExpiryDate(15);
-        User user = authenticate(username, password);
-
-        String jwtString = TokenUtil.getJWTString(username, user.getRolesString(), user.getVersion(), expiry, key);
-        Token token = new Token();
-        token.setAuthToken(jwtString);
-        token.setExpires(expiry);
-
+    @Consumes("application/json")
+    public Response authenticateUser(Credentials creds) {
+        User user = authenticate(creds);
+        Token token = tokenUtil.getJWTToken(user.getUsername(), user.getRolesString());
         return Response.ok(token).build();
     }
 
-    private Date getExpiryDate(int minutes) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.add(Calendar.MINUTE, minutes);
-        return calendar.getTime();
-    }
-
-    private User authenticate(String username, String password) throws NotAuthorizedException {
-        User user = null;
+    private User authenticate(Credentials creds) throws NotAuthorizedException {
+        User user;
         try {
-            user = uService.getUserByUsername(username);
+            user = userService.getUserByUsername(creds.getUsername());
         } catch (EntityNotFoundException e) {
-            logger.info("Invalid username '" + username + "' ");
-            throw new NotAuthorizedException("Invalid username '" + username + "' ");
+            logger.info("Invalid username '" + creds.getUsername() + "' ");
+            throw new NotAuthorizedException("Invalid username '" + creds.getUsername() + "' ");
         }
 
-        if (user.getPassword().equals(password)) {
+        if (passwordUtils.verify(creds.getPassword(), user.getPassword(), user.getSalt())) {
             logger.info("USER AUTHENTICATED");
         } else {
             logger.info("USER NOT AUTHENTICATED");

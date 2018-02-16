@@ -1,9 +1,11 @@
 package com.riabchych.cloudstock.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -12,30 +14,37 @@ import java.util.Set;
 public class User implements Serializable {
 
     @Id
-    @Column()
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name = "id")
+    private long id;
 
-    @Column()
+    @Column(name = "name")
     private String name;
 
-    @Column(columnDefinition = "TINYINT(1)")
-    private int isOwner;
-
-    @Column()
+    @JsonIgnore
+    @Column(name = "password")
     private String password;
 
-    @Column()
+    @JsonIgnore
+    @Column(name = "salt")
+    private String salt;
+
+    @Column(name = "username")
     private String username;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @Column(name = "password_reset_date")
+    private Date lastPasswordResetDate;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<Inventory> usedItems;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
     private Set<Inventory> ownedItems;
-    private int version = 0;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     public User() {
@@ -57,16 +66,9 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
+    @JsonIgnore
     public String[] getRolesString() {
-        return roles.stream().map(Role::getRole).toArray(String[]::new);
-    }
-
-    public int getVersion() {
-        return version;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
+        return roles.stream().map(role -> role.getName().toString()).toArray(String[]::new);
     }
 
     public Long getId() {
@@ -85,14 +87,7 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public int getIsOwner() {
-        return isOwner;
-    }
-
-    public void setIsOwner(int isOwner) {
-        this.isOwner = isOwner;
-    }
-
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -115,5 +110,22 @@ public class User implements Serializable {
 
     public void setOwnedItems(Set<Inventory> ownedItems) {
         this.ownedItems = ownedItems;
+    }
+
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
+    }
+
+    public void setLastPasswordResetDate(Date lastPasswordResetDate) {
+        this.lastPasswordResetDate = lastPasswordResetDate;
+    }
+
+    @JsonIgnore
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

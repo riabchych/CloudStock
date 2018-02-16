@@ -1,6 +1,8 @@
 package com.riabchych.cloudstock.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "role")
@@ -9,11 +11,28 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private int id;
-    @Column(name = "role")
-    private String role;
+    private long id;
 
-    public int getId() {
+    @Column(name = "name", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private EnumRole name;
+
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "roles")
+    private Set<User> users = new HashSet<>();
+
+    public Role(EnumRole name) {
+        this.name = name;
+    }
+
+    public Role() {
+    }
+
+    public long getId() {
         return id;
     }
 
@@ -21,16 +40,11 @@ public class Role {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public EnumRole getName() {
+        return name;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    @Override
-    public String toString() {
-        return getRole();
+    public void setName(EnumRole name) {
+        this.name = name;
     }
 }
