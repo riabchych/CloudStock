@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42462e02-e8a4-4517-8e5b-28c1aca3814a" name="Default" comment="updated interface">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/CloudstockApplication.java" afterPath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/CloudstockApplication.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/dao/BarcodeDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/dao/BarcodeDAO.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/dao/IBarcodeDAO.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/dao/IUserDAO.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/dao/UserDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/dao/UserDAO.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/endpoint/AuthenticationEndpoint.java" afterPath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/endpoint/AuthenticationEndpoint.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/endpoint/BarcodeEndpoint.java" afterPath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/endpoint/BarcodeEndpoint.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/entity/Inventory.java" afterPath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/entity/Inventory.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/entity/Role.java" afterPath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/entity/Role.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/entity/Token.java" afterPath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/entity/Token.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/entity/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/entity/User.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/filter/CORSFilter.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/riabchych/cloudstock/filter/JWTSecurityFilter.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -536,7 +524,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="57" />
     <option name="y" value="47" />
     <option name="width" value="1309" />
@@ -967,7 +955,7 @@
     <option name="totallyTimeSpent" value="11894000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
