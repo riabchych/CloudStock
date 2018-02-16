@@ -20,8 +20,6 @@ import java.io.IOException;
 @CrossOrigin
 public class CrossOriginResponseFilter implements ContainerResponseFilter {
 
-    private static final Logger log = LoggerFactory.getLogger(CrossOriginResponseFilter.class);
-
     private final CrossOriginConfiguration configuration;
 
     public CrossOriginResponseFilter(CrossOriginConfiguration configuration) {
@@ -45,12 +43,7 @@ public class CrossOriginResponseFilter implements ContainerResponseFilter {
         }
 
         // If no Access Control Request Header is given, we should not interpret this as a Preflight Request:
-        if (!requestContext.getHeaders().containsKey(CrossOriginHeaders.ACCESS_CONTROL_REQUEST_METHOD_HEADER)) {
-            return false;
-        }
-
-        // This is a Preflight Request:
-        return true;
+        return requestContext.getHeaders().containsKey(CrossOriginHeaders.ACCESS_CONTROL_REQUEST_METHOD_HEADER);
     }
 
     private void handleSimpleRequest(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
