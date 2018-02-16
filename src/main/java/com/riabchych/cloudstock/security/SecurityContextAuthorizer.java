@@ -1,4 +1,4 @@
-package com.riabchych.cloudstock.filter;
+package com.riabchych.cloudstock.security;
 
 
 import javax.security.auth.Subject;
