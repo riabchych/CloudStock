@@ -11,11 +11,11 @@ import java.io.Serializable;
 public class Barcode implements Serializable {
 
     @Id
-    @Column()
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column()
+    @Column(name = "code", nullable = false)
     private String code;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "barcode")

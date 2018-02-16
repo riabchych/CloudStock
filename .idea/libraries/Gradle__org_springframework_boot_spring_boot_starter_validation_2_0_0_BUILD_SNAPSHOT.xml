@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.boot:spring-boot-starter-validation:2.0.0.BUILD-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-validation/2.0.0.BUILD-SNAPSHOT/5ebc30b5a39a75999464396d7f3701fd60bb2971/spring-boot-starter-validation-2.0.0.BUILD-SNAPSHOT.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-validation/2.0.0.BUILD-SNAPSHOT/92545adc1cdbfc5678f890c3311caecda47fec03/spring-boot-starter-validation-2.0.0.BUILD-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-validation/2.0.0.BUILD-SNAPSHOT/ee62cfb3316e53888c6896dc1990286e5bee7304/spring-boot-starter-validation-2.0.0.BUILD-SNAPSHOT-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-validation/2.0.0.BUILD-SNAPSHOT/d9530d4e576a861c00869a214ad76bf7ee5ec88c/spring-boot-starter-validation-2.0.0.BUILD-SNAPSHOT-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-validation/2.0.0.BUILD-SNAPSHOT/7d14e55933b2e3e7ee89d0d1ca743c4072f14e3e/spring-boot-starter-validation-2.0.0.BUILD-SNAPSHOT-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-validation/2.0.0.BUILD-SNAPSHOT/7ae809bc95a759696c1eca373c7999dac19bf6ac/spring-boot-starter-validation-2.0.0.BUILD-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
