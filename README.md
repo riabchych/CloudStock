@@ -1,2 +1,0 @@
-# CloudStock
-Inventory Management System
